@@ -1,0 +1,22 @@
+{
+  "name": "backend_onlineordermanagement_2024",
+  "version": "1.0.0",
+  "description": "A backend system designed to help small businesses manage their online orders, inventory, and supplier relationships. Built with Node.js, Express, and MySQL.",
+  "main": "src/backend/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/backend/index.js",
+    "lint": "eslint .",
+    "start": "node src/backend/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "nodemon": "^3.1.7"
+  }
+}
