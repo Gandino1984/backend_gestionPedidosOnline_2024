@@ -22,6 +22,6 @@ services:
     depends_on:
       - db
     volumes:
-      - ./:/app
+      - ./:/app:ro
       - /app/node_modules
   
