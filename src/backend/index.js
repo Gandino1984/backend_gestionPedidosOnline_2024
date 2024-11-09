@@ -14,6 +14,6 @@ app.use(express.urlencoded({ extended: true })); //permite leer el body de la pe
 
 app.use("/", router);
 
-app.listen(process.env.APP_PORT, () => {
+app.listen(3000, () => {
   console.log(`SERVER RUNNING ON PORT = ${process.env.APP_PORT}`)
 })

@@ -13,3 +13,15 @@ services:
     volumes:
       - .db/data:/var/lib/mysql
       - ./db/scripts:/docker-entrypoint-initdb.d
+  backend:
+    build: .
+    container_name: ${BACKEND_HOST}
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT}:3000
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+      - /app/node_modules
+  
