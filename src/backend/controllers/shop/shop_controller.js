@@ -1,64 +1,88 @@
-//datos de shope falseados hasta tener el modelo
-const shops = [
-    {id_shop: 1, name_shop: "shop1", pass_shop: "pass1", location_shop: "location1"},
-    {id_shop: 2, name_shop: "shop2", pass_shop: "pass2", location_shop: "location2"},
-    {id_shop: 3, name_shop: "shop3", pass_shop: "pass3", location_shop: "location3"},
-]
+import shop_model from "../../models/shop_model.js";
 
 async function getAll() {
-    return {data:shops};
+    try {
+        const shops = await shop_model.findAll();
+        console.log("Retrieved shops:", shops);
+        return { data: shops };
+    } catch (error) {
+        console.error("Error in getAll:", error);
+        return { error: error.message };
+    }
 }
 
 async function getById(id) {
-    const shop = shops.find(shop => shop.id_shop == id);
-    if(!shop){
-        return {error: "shop not found"};
+    try {
+        const shop = await shop_model.findByPk(id);
+        console.log("Retrieved shop:", shop);
+        
+        if (!shop) {
+            console.log("shop not found with id:", id);
+            return { error: "shop not found" };
+        }
+        
+        return { data: shop };
+    } catch (error) {
+        console.error("Error in getById:", error);
+        return { error: error.message };
     }
-    return {data: shop};
 }
 
 async function create(shopData) {
-    const {name_shop, pass_shop, location_shop } = shopData;
-    //get method =  http://localhost:3007/shop/create?name_shop=toto&pass_shop=passtoto&location_shop=location toto
-    if(!name_shop || !pass_shop || !location_shop){
-        return {error: "shop could not be created"};  
+    try {
+        const shop = await shop_model.create(shopData);
+        console.log("Created shop:", shop);
+        return { data: shop };
+    } catch (error) {
+        console.error("Error in create:", error);
+        return { error: error.message };
     }
-    const maxId = Math.max(...shops.map(shop => shop.id_shop));
-    const newshop = {id_shop: maxId + 1, name_shop, pass_shop, location_shop};
-    shops.push(newshop);
-    return {data: newshop};
 }   
 
 async function update(id, shopData) {
-    const {id_shop, name_shop, pass_shop, location_shop } = shopData; 
-    const shop = shops.find(shop => shop.id_shop == id);
-    if(!shop){
-        return {error: "shop could not be modified"};
+    try {
+        const { name_shop, pass_shop, location_shop } = shopData;
+        
+        const shop = await shop_model.findByPk(id);
+        if (!shop) {
+            console.log("shop not found with id:", id);
+            return { error: "shop not found" };
+        }
+
+        // Only update fields that were provided
+        if (name_shop) shop.name_shop = name_shop;
+        if (pass_shop) shop.pass_shop = pass_shop;
+        if (location_shop) shop.location_shop = location_shop;
+    
+        await shop.save();
+        console.log("Updated shop:", shop);
+        return { data: shop };
+    } catch (error) {
+        console.error("Error in update:", error);
+        return { error: error.message };
     }
-    if(id_shop){
-        shop.id_shop = Number(id_shop);   
-    }
-    if(name_shop){
-        shop.name_shop = name_shop;    
-    }
-    if(pass_shop){
-        shop.pass_shop = pass_shop;    
-    }
-    if(location_shop){
-        shop.location_shop = location_shop;    
-    }
-    return {data: shop};
 }
 
 async function removeById(id) {
-    const shopIndex = shops.findIndex(shop => shop.id_shop == id);
-    if(shopIndex == -1){
-        return {error: "shop could not be deleted"};
+    try {
+        const shop = await shop_model.findByPk(id);
+        if (!shop) {
+            console.log("shop not found with id:", id);
+            return { error: "shop not found" };
+        }
+
+        await shop_model.destroy({
+            where: { id_shop: id }
+        });
+        
+        console.log("Deleted shop with id:", id);
+        return { data: { message: "shop successfully deleted", id } };
+    } catch (error) {
+        console.error("Error in removeById:", error);
+        return { error: error.message };
     }
-    const deletedshop = shops.splice(shopIndex, 1);
-    return {data: deletedshop};
 }
 
 export { getAll, getById, create, update, removeById }
 
-export default{ getAll, getById, create, update, removeById }
+export default { getAll, getById, create, update, removeById }
