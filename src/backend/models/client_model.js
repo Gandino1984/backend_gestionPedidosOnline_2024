@@ -1,40 +1,29 @@
-// import connection from "src/config/mysqlOrSequelize.js";
+import { DataTypes } from "sequelize";
 
-async function findAll() {
-    const queryString = "SELECT * FROM client";
-    const [rows, fields] = await connection.query(queryString);
-    return rows;
-}
+import sequelize from "../config/sequelize.js";
 
-async function findByPk(pk) {
-    const queryString = "SELECT * FROM client WHERE id_client = ?";
-    const [rows, fields] = await connection.query(queryString, [pk]);
-    return rows[0];
-}
+const client_model = sequelize.define("client", {
+    id_client: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name_client: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    pass_client: {
+        type: DataTypes.STRING(5),
+        allowNull: false
+    },
+    location_client: {
+        type: DataTypes.STRING(45),
+        allowNull: false
+    }
+}, {
+    timestamps: false,
+    freezeTableName: true
+});
 
-async function create(data) {
-    const queryString = "INSERT INTO client (name_client, pass_client, location_client) VALUES (?,?,?)";
-    const [rows, fields] = await connection.query(queryString, [data.name_client, data.pass_client, data.location_client]);
-    return rows;
-}
-
-async function update(pk, data) {
-    const queryString = "UPDATE client SET name_client = ?, pass_client = ?, location_client = ? WHERE id_client = ?";
-    const [rows, fields] = await connection.query(queryString, [data.name_client, data.pass_client, data.location_client, pk]);
-    return rows;
-}
-
-async function remove(pk) {
-    const queryString = "DELETE FROM client WHERE id_client = ?";
-    const [rows, fields] = await connection.query(queryString, [pk]);
-    return rows;
-}
-
-export default { 
-    findAll,
-    findByPk,
-    create,
-    update,
-    remove 
-}
-
+export default client_model;

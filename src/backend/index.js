@@ -1,8 +1,7 @@
 import express from 'express'; 
 import dotenv from 'dotenv';
 
-// import connection
-
+import sequelize from './config/sequelize.js';
 import router from './routers/main_router.js';
 
 dotenv.config();
