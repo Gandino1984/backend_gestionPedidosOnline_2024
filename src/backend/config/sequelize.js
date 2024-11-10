@@ -13,8 +13,7 @@ const sequelize = new Sequelize(
         define: {
             timestamps: false,
             freezeTableName: true
-        },
-        logging: console.log // This will help debug SQL queries
+        }
     }
 );
 

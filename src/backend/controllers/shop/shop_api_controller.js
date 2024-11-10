@@ -36,8 +36,6 @@ async function removeById(req, res) {
     res.json({error, data});
 }
 
-
-
 export {
     getAll,
     getById,

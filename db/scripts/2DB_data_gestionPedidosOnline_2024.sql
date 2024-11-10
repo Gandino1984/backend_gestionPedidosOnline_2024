@@ -1,69 +1,65 @@
 USE `DB_gestionPedidosOnline_2024`;
 
--- Insert clients
+-- Inserting data into client table
 INSERT INTO `client` (`name_client`, `pass_client`, `location_client`) VALUES
-('Juan Pérez', '12345', 'Madrid'),
-('María García', '67890', 'Barcelona'),
-('Luis Rodríguez', 'abc12', 'Valencia'),
-('Ana Martínez', 'def34', 'Sevilla'),
-('Carlos Sánchez', 'ghi56', 'Bilbao');
+('Juan García', '12345', 'Madrid'),
+('María López', '67890', 'Barcelona'),
+('Carlos Martínez', 'abc12', 'Valencia'),
+('Ana Rodríguez', 'def34', 'Sevilla'),
+('Pedro Sánchez', 'ghi56', 'Bilbao');
 
--- Insert products
-INSERT INTO `product` (`nombre_producto`, `price_product`, `discount_product`, `season_product`) VALUES
-('Tomates Orgánicos', 2.99, 0, 'Summer'),
-('Manzanas Golden', 1.99, 10, 'Fall'),
-('Lechugas Frescas', 1.50, 0, 'Spring'),
-('Zanahorias', 1.25, 5, 'Winter'),
-('Fresas', 3.99, 15, 'Spring'),
-('Patatas', 2.50, 0, 'All'),
-('Cebollas', 1.75, 0, 'All');
+-- Inserting data into product table
+INSERT INTO `product` (`name_product`, `price_product`, `discount_product`, `season_product`) VALUES
+('Tomates orgánicos', 2.99, 10, 'Verano'),
+('Manzanas Golden', 1.99, 5, 'Otoño'),
+('Fresas frescas', 3.50, 15, 'Primavera'),
+('Naranjas Valencia', 2.50, 0, 'Invierno'),
+('Aguacates', 4.99, 20, 'Todo el año');
 
--- Insert shops
+-- Inserting data into shop table
 INSERT INTO `shop` (`name_shop`, `location_shop`, `pass_shop`) VALUES
-('Mercado Central', 'Madrid', 'mc123'),
-('Frutas y Verduras López', 'Barcelona', 'fv456'),
-('El Huerto Feliz', 'Valencia', 'eh789'),
-('La Plaza Verde', 'Sevilla', 'pv012'),
-('Mercado del Puerto', 'Bilbao', 'mp345');
+('FrutasMarket', 'Madrid Centro', '11111'),
+('VerdePlus', 'Barcelona Norte', '22222'),
+('EcoTienda', 'Valencia Sur', '33333'),
+('BioFresh', 'Sevilla Este', '44444'),
+('NaturShop', 'Bilbao Oeste', '55555');
 
--- Insert producers
+-- Inserting data into producer table
 INSERT INTO `producer` (`name_producer`, `location_producer`) VALUES
-('Finca Los Naranjos', 'Valencia'),
-('Huerta Ecológica', 'Murcia'),
-('Invernaderos del Sur', 'Almería'),
-('Productos del Norte', 'Navarra'),
-('Cultivos Orgánicos', 'La Rioja');
+('Finca El Paraíso', 'Murcia'),
+('Huertos Ecológicos', 'Granada'),
+('Cultivos del Norte', 'Navarra'),
+('Agricultores Unidos', 'Almería'),
+('Orgánicos del Sur', 'Málaga');
 
--- Insert orders (client-product relationships with dates)
+-- Inserting data into orders table (using previously inserted IDs)
 INSERT INTO `orders` (`client_id_client`, `product_id_producto`, `date_order`) VALUES
 (1, 1, '2024-01-15'),
-(1, 3, '2024-01-15'),
-(2, 2, '2024-02-01'),
-(3, 4, '2024-02-15'),
-(4, 5, '2024-03-01'),
-(5, 1, '2024-03-15');
+(2, 2, '2024-02-20'),
+(3, 3, '2024-03-25'),
+(4, 4, '2024-04-10'),
+(5, 5, '2024-05-05');
 
--- Insert sales (shop-client relationships)
+-- Inserting data into sales table
 INSERT INTO `sales` (`shop_id_shop`, `client_id_client`) VALUES
 (1, 1),
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5);
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
--- Insert buys (shop-producer relationships)
+-- Inserting data into buys table
 INSERT INTO `buys` (`shop_id_shop`, `producer_id_producer`) VALUES
 (1, 1),
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5);
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
--- Insert productions (producer-product relationships)
+-- Inserting data into productions table
 INSERT INTO `productions` (`producer_id_producer`, `product_id_producto`) VALUES
 (1, 1),
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5),
-(5, 6);
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);

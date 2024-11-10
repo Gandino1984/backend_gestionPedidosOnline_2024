@@ -41,8 +41,7 @@ async function create(productData) {
 
 async function update(id, productData) {
     try {
-        const { name_product, pass_product, location_product } = productData;
-        
+        const { name_product, price_product, discount_product, season_product} = productData;
         const product = await product_model.findByPk(id);
         if (!product) {
             console.log("product not found with id:", id);
@@ -51,8 +50,9 @@ async function update(id, productData) {
 
         // Only update fields that were provided
         if (name_product) product.name_product = name_product;
-        if (pass_product) product.pass_product = pass_product;
-        if (location_product) product.location_product = location_product;
+        if (price_product) product.price_product = price_product;
+        if (discount_product) product.discount_product = discount_product;
+        if (season_product) product.season_product = season_product;
     
         await product.save();
         console.log("Updated product:", product);

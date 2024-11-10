@@ -41,7 +41,7 @@ async function create(producerData) {
 
 async function update(id, producerData) {
     try {
-        const { name_producer, pass_producer, location_producer } = producerData;
+        const { name_producer, location_producer } = producerData;
         
         const producer = await producer_model.findByPk(id);
         if (!producer) {
@@ -51,7 +51,6 @@ async function update(id, producerData) {
 
         // Only update fields that were provided
         if (name_producer) producer.name_producer = name_producer;
-        if (pass_producer) producer.pass_producer = pass_producer;
         if (location_producer) producer.location_producer = location_producer;
     
         await producer.save();
