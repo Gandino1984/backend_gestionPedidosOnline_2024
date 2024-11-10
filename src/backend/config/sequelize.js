@@ -3,27 +3,28 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-//connection
 const sequelize = new Sequelize(
     process.env.MYSQL_DATABASE, 
     process.env.MYSQL_USER, 
     process.env.MYSQL_PASSWORD, {
         host: process.env.MYSQL_HOST,
-        port: process.env.MYSQL_PORT || 3306,  
+        port: 3306,  
         dialect: "mysql",
         define: {
             timestamps: false,
             freezeTableName: true
-        }
+        },
+        logging: console.log // This will help debug SQL queries
     }
 );
 
 async function authenticate() {
     try {
         await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log('SEQUELIZE: Connection has been established successfully.');
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('SEQUELIZE: Unable to connect to the database:', error);
+        throw error;
     }
 } 
 
