@@ -1,8 +1,8 @@
 node_modules
 npm-debug.log
+.env
 .git
 .gitignore
-.env
-.db
-*.md
-.DS_Store
+README.md
+.dockerignore
+db/data
