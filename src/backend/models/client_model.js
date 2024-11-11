@@ -26,4 +26,7 @@ const client_model = sequelize.define("client", {
     freezeTableName: true
 });
 
+client_model.belongsToMany(product_model, {through: "orders"});
+product_model.belongsToMany(client_model, {through: "orders"});
+
 export default client_model;

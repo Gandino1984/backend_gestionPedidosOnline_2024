@@ -31,6 +31,8 @@ The system includes the following main entities:
 - Sales
 - Purchases
 
+![alt text](db/mysql_model/image.png)
+
 ## 🚀 Prerequisites
 
 - Node.js 20 or higher
