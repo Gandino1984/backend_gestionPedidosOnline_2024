@@ -2,7 +2,7 @@ import client_model from "../../models/client_model.js";
 
 async function getAll() {
     try {
-        const clients = await client_model.findAll();
+        const clients = await client_model.findAll({include: "products"});
         console.log("Retrieved clients:", clients);
         return { data: clients };
     } catch (error) {
