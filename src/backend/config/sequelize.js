@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
+import  setupRelationships from "./relationships.js";
 
 dotenv.config();
 
@@ -17,16 +18,21 @@ const sequelize = new Sequelize(
     }
 );
 
-async function authenticate() {
+async function initialize() {
     try {
         await sequelize.authenticate();
-        console.log('SEQUELIZE: Connection has been established successfully***************************');
+        console.log('******* SEQUELIZE: Connection has been established successfully ********');
+        setupRelationships();
+        
+        // sync the database
+        await sequelize.sync({ alter: true });
     } catch (error) {
-        console.error('SEQUELIZE: Unable to connect to the database:', error);
+        console.error('!!!!!! SEQUELIZE: Unable to connect to the database:', error);
         throw error;
     }
 } 
 
-authenticate();
+
+initialize();
 
 export default sequelize;
