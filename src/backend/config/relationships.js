@@ -1,14 +1,14 @@
 // relationships.js
-import client_model from "src/backend/models/client_model.js";
-import product_model from "src/backend/models/product_model.js";
-import shop_model from "src/backend/models/shop_model.js";
-import producer_model from "src/backend/models/producer_model.js";
-import orders_model from "src/backend/models/orders_model.js";
-import sales_model from "src/backend/models/sales_model.js";
-import buys_model from "src/backend/models/buys_model.js";
-import productions_model from "src/backend/models/productions_model.js";
+import client_model from "../models/client_model.js";
+import product_model from "../models/product_model.js";
+import shop_model from "../models/shop_model.js";
+import producer_model from "../models/producer_model.js";
+import orders_model from "../models/orders_model.js";
+import sales_model from "../models/sales_model.js";
+import buys_model from "../models/buys_model.js";
+import productions_model from "../models/productions_model.js";
 
-function setupRelationships() {
+export function setupRelationships() {
     // Client-Product relationship through Orders
     client_model.belongsToMany(product_model, {
         through: orders_model,

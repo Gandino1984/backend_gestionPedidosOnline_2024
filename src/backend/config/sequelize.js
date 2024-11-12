@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import  setupRelationships from "./relationships.js";
 
 dotenv.config();
 
@@ -22,6 +21,9 @@ async function initialize() {
     try {
         await sequelize.authenticate();
         console.log('******* SEQUELIZE: Connection has been established successfully ********');
+        
+        // Import and setup relationships after models are defined
+        const { setupRelationships } = await import('./relationships.js');
         setupRelationships();
         
         // sync the database
@@ -32,7 +34,5 @@ async function initialize() {
     }
 } 
 
-
-initialize();
-
+export { initialize };
 export default sequelize;
