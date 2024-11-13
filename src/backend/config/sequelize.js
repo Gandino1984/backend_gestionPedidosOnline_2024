@@ -17,16 +17,22 @@ const sequelize = new Sequelize(
     }
 );
 
-async function authenticate() {
+async function initialize() {
     try {
         await sequelize.authenticate();
-        console.log('SEQUELIZE: Connection has been established successfully.');
+        console.log('******* SEQUELIZE: Connection has been established successfully ********');
+        
+        // Import and setup relationships after models are defined
+        const { setupRelationships } = await import('./relationships.js');
+        setupRelationships();
+        
+        // sync the database
+        await sequelize.sync({ alter: true });
     } catch (error) {
-        console.error('SEQUELIZE: Unable to connect to the database:', error);
+        console.error('!!!!!! SEQUELIZE: Unable to connect to the database:', error);
         throw error;
     }
 } 
 
-authenticate();
-
+export { initialize };
 export default sequelize;

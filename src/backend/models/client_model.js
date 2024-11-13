@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-
 import sequelize from "../config/sequelize.js";
+import product_model from "./product_model.js";
 
 const client_model = sequelize.define("client", {
     id_client: {
@@ -26,7 +26,26 @@ const client_model = sequelize.define("client", {
     freezeTableName: true
 });
 
-// client.belongsToMany(product, {through: "orders"});
-// product.belongsToMany(client, {through: "orders"});
+// client_model.belongsToMany(product_model, {
+//     through: {
+//         model: 'orders',
+//         unique: false
+//     },
+//     as: "products",
+//     foreignKey: "id_client",     
+//     otherKey: "id_product",
+//     constraints: false  // Add this to prevent foreign key constraint errors
+// });
+
+// product_model.belongsToMany(client_model, {
+//     through: {
+//         model: 'orders',
+//         unique: false
+//     },
+//     as: "clients",
+//     foreignKey: "id_product",    
+//     otherKey: "id_client",
+//     constraints: false  // Add this to prevent foreign key constraint errors
+// });
 
 export default client_model;
