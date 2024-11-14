@@ -18,6 +18,7 @@ export const AppContextProvider = ({ children }) => {
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
 
 
   // Values to be shared across components
@@ -27,7 +28,9 @@ export const AppContextProvider = ({ children }) => {
     username,
     setUsername,
     password,
-    setPassword
+    setPassword,
+    passwordRepeat,
+    setPasswordRepeat
   };
 
   return (

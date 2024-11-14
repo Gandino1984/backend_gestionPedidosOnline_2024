@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../AppContext.jsx';
+import NumericKeyboardInput from './NumericKeyboard.jsx';
 
 const LoginRegisterForm = () => {
-    const { 
-        isLoggingIn,
-        setIsLoggingIn,
-        username,
-        setUsername,
-        password,
-        setPassword
-    } = useAppContext();
+  const { 
+    isLoggingIn,
+    setIsLoggingIn,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    passwordRepeat,
+    setPasswordRepeat
+  } = useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Implement login or registration logic here
-    console.log('Submitted:', { username, password });
+    console.log('Submitted:', { username, password, passwordRepeat });
   };
 
   const toggleForm = () => {
     setIsLoggingIn((prevState) => !prevState);
     setUsername('');
     setPassword('');
+    setPasswordRepeat('');
   };
 
   return (
     <div className="form-container">
       <h2 className="form-title">
-        {isLoggingIn ? 'Login' : 'Register'}
+        {isLoggingIn ? 'INICIA SESIÓN' : 'CREA TU USUARIO'}
       </h2>
       <form onSubmit={handleSubmit} className="form-content">
         <div className="form-field">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">¿Cuál es tu nombre?</label>
           <input
             id="username"
             type="text"
@@ -40,18 +44,17 @@ const LoginRegisterForm = () => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
+          <label htmlFor="password">Teclea tu contraseña</label>
+          <NumericKeyboardInput
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            onChange={setPassword}
+            showMaskedPassword
           />
         </div>
+       
         <div className="form-actions">
           <button type="submit">
-            {isLoggingIn ? 'Login' : 'Register'}
+            {isLoggingIn ? 'Entrar' : 'Crear cuenta'}
           </button>
           <button
             type="button"
@@ -59,10 +62,10 @@ const LoginRegisterForm = () => {
             onClick={toggleForm}
           >
             {isLoggingIn
-              ? "Don't have an account? Register"
-              : 'Already have an account? Login'}
+              ? "¿No tienes cuenta?"
+              : "¿Ya tienes cuenta?"}
           </button>
-        </div>
+        </div>  
       </form>
     </div>
   );
