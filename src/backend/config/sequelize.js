@@ -25,7 +25,7 @@ async function initialize() {
         // sync the database
         await sequelize.sync({ alter: true });
     } catch (error) {
-        console.error('!!!!!! SEQUELIZE: Unable to connect to the database:', error);
+        console.error('!!!! SEQUELIZE: Unable to connect to the database:', error);
         throw error;
     }
 } 
