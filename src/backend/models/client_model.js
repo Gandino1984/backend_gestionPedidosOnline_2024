@@ -1,9 +1,10 @@
-import { DataTypes } from "sequelize";
 
 import sequelize from "../config/sequelize.js";
+import product_model from "./product_model.js";
+import { DataTypes } from "sequelize";
 
 const client_model = sequelize.define("client", {
-    id_client: {
+    client_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,
@@ -26,7 +27,16 @@ const client_model = sequelize.define("client", {
     freezeTableName: true
 });
 
-// client.belongsToMany(product, {through: "orders"});
-// product.belongsToMany(client, {through: "orders"});
+client_model.belongsToMany(product_model, {
+    through: 'orders',
+    as: "products",     
+    foreignKey: "product_id",
+});
+
+product_model.belongsToMany(client_model, {
+    through: 'orders',
+    as: "clients",
+    foreignKey: "client_id",    
+});
 
 export default client_model;

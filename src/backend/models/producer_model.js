@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 
 const producer_model = sequelize.define("producer", {
-    id_producer: {
+    producer_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,

@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 
 const product_model = sequelize.define("product", {
-    id_product: {
+    product_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,
@@ -30,9 +30,5 @@ const product_model = sequelize.define("product", {
     freezeTableName: true
 });
 
-
-
-// product_model.belongsToMany(producer_model, {through: "productions"});
-// producer_model.belongsToMany(product_model, {through: "productions"});
 
 export default product_model;
