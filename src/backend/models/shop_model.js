@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 
 const shop_model = sequelize.define("shop", {
-    id_shop: {
+    shop_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,

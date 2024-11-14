@@ -22,10 +22,6 @@ async function initialize() {
         await sequelize.authenticate();
         console.log('******* SEQUELIZE: Connection has been established successfully ********');
         
-        // Import and setup relationships after models are defined
-        const { setupRelationships } = await import('./relationships.js');
-        setupRelationships();
-        
         // sync the database
         await sequelize.sync({ alter: true });
     } catch (error) {

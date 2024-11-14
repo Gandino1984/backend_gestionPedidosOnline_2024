@@ -3,17 +3,11 @@ import product_model from "../../models/product_model.js";
 
 async function getAll() {
     try {
-        const clients = await client_model.findAll({
-            include: [{
-                model: product_model,
-                as: 'products',
-                through: { attributes: [] } // This excludes the junction table fields
-            }]
-        });
+        const clients = await client_model.findAll({include: "products"});
         console.log("Retrieved clients:", clients);
         return { data: clients };
     } catch (error) {
-        console.error("Error in getAll:", error);
+        console.error("!!!! CLIENT CONTROLLER: Error in getAll() -> ", error);
         return { error: error.message };
     }
 }
@@ -45,6 +39,7 @@ async function create(clientData) {
         return { error: error.message };
     }
 }   
+
 
 async function update(id, clientData) {
     try {
