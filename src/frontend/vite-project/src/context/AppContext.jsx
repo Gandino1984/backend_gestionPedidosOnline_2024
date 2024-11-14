@@ -16,20 +16,14 @@ export const useAppContext = () => {
 // Provider component
 export const AppContextProvider = ({ children }) => {
   // Define your state variables here
-//   const [user, setUser] = useState(null);
-//   const [theme, setTheme] = useState('light');
-//   const [isLoading, setIsLoading] = useState(false);
+//   const [example, setExample] = useState(null);
+
 
   // Values to be shared across components
   const value = {
-    // State
-    // user,
-    // theme,
-    // isLoading,
-    // // State setters
-    // setUser,
-    // setTheme,
-    // setIsLoading,
+    // example,
+    // setExample,
+    
     // Add any other shared functions here
   };
 
