@@ -26,26 +26,16 @@ const client_model = sequelize.define("client", {
     freezeTableName: true
 });
 
-// client_model.belongsToMany(product_model, {
-//     through: {
-//         model: 'orders',
-//         unique: false
-//     },
-//     as: "products",
-//     foreignKey: "id_client",     
-//     otherKey: "id_product",
-//     constraints: false  // Add this to prevent foreign key constraint errors
-// });
+client_model.belongsToMany(product_model, {
+    through: 'orders',
+    as: "productsBoughtByClient",
+    foreignKey: "product_id",
+});
 
-// product_model.belongsToMany(client_model, {
-//     through: {
-//         model: 'orders',
-//         unique: false
-//     },
-//     as: "clients",
-//     foreignKey: "id_product",    
-//     otherKey: "id_client",
-//     constraints: false  // Add this to prevent foreign key constraint errors
-// });
+product_model.belongsToMany(client_model, {
+    through: 'orders',
+    as: "clientsBoughtProduct",
+    foreignKey: "client_id",
+});
 
 export default client_model;

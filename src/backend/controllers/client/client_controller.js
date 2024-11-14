@@ -4,16 +4,12 @@ import product_model from "../../models/product_model.js";
 async function getAll() {
     try {
         const clients = await client_model.findAll({
-            include: [{
-                model: product_model,
-                as: 'products',
-                through: { attributes: [] } // This excludes the junction table fields
-            }]
+            include: "productsBoughtByClient"
         });
-        console.log("Retrieved clients:", clients);
+        console.log("clients in the DB: ", clients);
         return { data: clients };
     } catch (error) {
-        console.error("Error in getAll:", error);
+        console.error("!!!! CLIENT MODEL: Error in getAll() = ", error);
         return { error: error.message };
     }
 }
