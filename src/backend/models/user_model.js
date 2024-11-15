@@ -3,22 +3,22 @@ import sequelize from "../config/sequelize.js";
 import product_model from "./product_model.js";
 import { DataTypes } from "sequelize";
 
-const client_model = sequelize.define("client", {
-    client_id: {
+const user_model = sequelize.define("user", {
+    user_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    name_client: {
+    name_user: {
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    pass_client: {
+    pass_user: {
         type: DataTypes.STRING(5),
         allowNull: false
     },
-    location_client: {
+    location_user: {
         type: DataTypes.STRING(45),
         allowNull: false
     }
@@ -27,16 +27,16 @@ const client_model = sequelize.define("client", {
     freezeTableName: true
 });
 
-client_model.belongsToMany(product_model, {
+user_model.belongsToMany(product_model, {
     through: 'orders',
     as: "products",     
     foreignKey: "product_id",
 });
 
-product_model.belongsToMany(client_model, {
+product_model.belongsToMany(user_model, {
     through: 'orders',
-    as: "clients",
-    foreignKey: "client_id",    
+    as: "users",
+    foreignKey: "user_id",    
 });
 
-export default client_model;
+export default user_model;
