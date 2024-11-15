@@ -1,0 +1,30 @@
+.validationMessage {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .validText {
+    color: #16a34a;
+    font-weight: 500;
+  }
+  
+  .errorText {
+    color: #dc2626;
+    font-weight: 500;
+  }
+  
+  .validIcon {
+    color: #16a34a;
+  }
+  
+  .errorIcon {
+    color: #dc2626;
+  }
+  
+  .passwordLabel {
+    min-height: 24px; /* Para evitar saltos en el layout */
+    display: block;
+  }
+  
+  /* Resto de los estilos existentes... */
