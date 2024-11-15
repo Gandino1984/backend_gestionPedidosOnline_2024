@@ -4,7 +4,7 @@ import product_model from "./product_model.js";
 import { DataTypes } from "sequelize";
 
 const user_model = sequelize.define("user", {
-    user_id: {
+    id_user: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         primaryKey: true,
@@ -20,6 +20,10 @@ const user_model = sequelize.define("user", {
     },
     location_user: {
         type: DataTypes.STRING(45),
+        allowNull: true
+    },
+    type_user: {
+        type: DataTypes.STRING(45),
         allowNull: false
     }
 }, {
@@ -30,13 +34,13 @@ const user_model = sequelize.define("user", {
 user_model.belongsToMany(product_model, {
     through: 'orders',
     as: "products",     
-    foreignKey: "product_id",
+    foreignKey: "product_id_orders",
 });
 
 product_model.belongsToMany(user_model, {
     through: 'orders',
     as: "users",
-    foreignKey: "user_id",    
+    foreignKey: "user_id_orders",    
 });
 
 export default user_model;

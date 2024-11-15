@@ -55,6 +55,7 @@ async function update(id, userData) {
         if (name_user) user.name_user = name_user;
         if (pass_user) user.pass_user = pass_user;
         if (location_user) user.location_user = location_user;
+        if (type_user) user.type_user = type_user;
     
         await user.save();
         console.log("Updated user:", user);

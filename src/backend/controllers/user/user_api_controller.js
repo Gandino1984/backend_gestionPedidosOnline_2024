@@ -15,8 +15,8 @@ async function create(req, res) {
     //post method
     // const {id_user, name_user, pass_user, location_user } = req.body;
     //get method
-    const { name_user, pass_user, location_user } = req.query;
-    const {error, data} = await userController.create({name_user, pass_user, location_user});
+    const { name_user, pass_user, location_user, type_user } = req.query;
+    const {error, data} = await userController.create({name_user, pass_user, location_user, type_user});
     res.json({error, data});
 }
 
@@ -25,8 +25,8 @@ async function update(req, res) {
     // const {id_user, name_user, pass_user, location_user } = req.body;
     //get method
     const id = req.params.id;
-    const {id_user, name_user, pass_user, location_user } = req.query;
-    const {error, data} = await userController.update(id, {id_user, name_user, pass_user, location_user});
+    const {id_user, name_user, pass_user, location_user, type_user } = req.query;
+    const {error, data} = await userController.update(id, {id_user, name_user, pass_user, location_user, type_user});
     res.json({error, data});
 }
 
