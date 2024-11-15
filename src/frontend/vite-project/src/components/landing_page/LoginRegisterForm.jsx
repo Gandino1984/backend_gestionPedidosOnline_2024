@@ -1,3 +1,4 @@
+// LoginRegisterForm.jsx
 import React, { useState, useContext } from 'react';
 import AppContext from '../../context/AppContext';
 import { useLoginRegisterForm } from './loginRegisterFormFunctions';
@@ -31,7 +32,10 @@ const LoginRegisterForm = () => {
     handleRepeatPasswordChange,
     isButtonDisabled,
     handleSubmit,
-    toggleForm
+    toggleForm,
+    handleBusinessSelect,
+    handleBackToForm,
+    handleFormSubmit
   } = useLoginRegisterForm(
     isLoggingIn,
     setIsLoggingIn,
@@ -46,26 +50,6 @@ const LoginRegisterForm = () => {
     setShowBusinessSelector,
     databaseResponse
   );
-
-  const handleBusinessSelect = (businessType) => {
-    console.log('Selected business:', businessType);
-    // Here you would typically handle the business selection,
-    // perhaps by saving it to context or making an API call
-  };
-
-  const handleBackToForm = () => {
-    setShowBusinessSelector(false);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (!isButtonDisabled()) {
-      // Verificamos la respuesta de la base de datos
-      if (databaseResponse) {
-        setShowBusinessSelector(true);
-      }
-    }
-  };
 
   if (showBusinessSelector) {
     return (
@@ -94,7 +78,13 @@ const LoginRegisterForm = () => {
         </div>
         <div className={styles.formField}>
           <label htmlFor="password" className={styles.passwordLabel}>
-            {getPasswordValidationMessage(isLoggingIn, showPasswordRepeat, passwordRepeat, password, showPasswordLabel)}
+            {getPasswordValidationMessage(
+              isLoggingIn,
+              showPasswordRepeat,
+              passwordRepeat,
+              password,
+              showPasswordLabel
+            )}
           </label>
           <NumericKeyboard
             key={keyboardKey}
@@ -105,23 +95,17 @@ const LoginRegisterForm = () => {
             onClear={handleClear}
           />
         </div>
-       
+
         <div className={styles.formActions}>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`${styles.submitButton} ${isButtonDisabled() ? styles.inactive : styles.active}`}
             disabled={isButtonDisabled()}
           >
             {isLoggingIn ? 'Entrar' : 'Crear cuenta'}
           </button>
-          <button
-            type="button"
-            className={styles.toggleButton}
-            onClick={toggleForm}
-          >
-            {isLoggingIn
-              ? "¿No tienes cuenta?"
-              : "¿Ya tienes cuenta?"}
+          <button type="button" className={styles.toggleButton} onClick={toggleForm}>
+            {isLoggingIn ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
           </button>
         </div>
       </form>

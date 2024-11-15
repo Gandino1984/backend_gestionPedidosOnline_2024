@@ -36,7 +36,7 @@ const BusinessTypeSelector = ({ onSelectBusiness, onBack }) => {
       
       <div className="space-y-3">
         <BusinessTypeButton onClick={() => handleClick("General")}>
-          Negocio General
+          General
         </BusinessTypeButton>
         <BusinessTypeButton onClick={() => handleClick("Carnicería")}>
           Carnicería
@@ -51,10 +51,7 @@ const BusinessTypeSelector = ({ onSelectBusiness, onBack }) => {
           Restaurante / Bar
         </BusinessTypeButton>
       </div>
-      
-      <p className="text-sm text-gray-500 text-center mt-6">
-        Podrás personalizar más opciones después de seleccionar el tipo de negocio
-      </p>
+    
     </div>
   );
 };
