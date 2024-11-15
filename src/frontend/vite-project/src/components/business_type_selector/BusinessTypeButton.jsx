@@ -1,9 +1,13 @@
 import React from 'react';
-// import { Button } from '@mui/material';
 
-const BusinessTypeButton = ({ label, onClick }) => {
+const BusinessTypeButton = ({ children, onClick }) => {
   return (
-    <Button onClick={onClick}>{label}</Button>
+    <button
+      onClick={onClick}
+      className="w-full mb-2 p-4 text-lg"
+    >
+      {children}
+    </button>
   );
 };
 

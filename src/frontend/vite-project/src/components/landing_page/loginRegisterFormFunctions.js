@@ -8,7 +8,9 @@ export const useLoginRegisterForm = (
     passwordRepeat,
     setShowPasswordRepeat,
     setShowPasswordLabel,
-    setKeyboardKey
+    setKeyboardKey,
+    setShowBusinessSelector,
+    databaseResponse
   ) => {
     const handlePasswordComplete = () => {
       if (!isLoggingIn) {
@@ -54,7 +56,10 @@ export const useLoginRegisterForm = (
     const handleSubmit = (e) => {
       e.preventDefault();
       if (!isButtonDisabled()) {
-        console.log('Submitted:', { password, passwordRepeat });
+        // Verificamos la respuesta de la base de datos
+        if (databaseResponse) {
+          setShowBusinessSelector(true);
+        }
       }
     };
   
@@ -78,4 +83,3 @@ export const useLoginRegisterForm = (
       toggleForm
     };
   };
-  
