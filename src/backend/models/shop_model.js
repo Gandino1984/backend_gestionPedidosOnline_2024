@@ -20,6 +20,10 @@ const shop_model = sequelize.define("shop", {
     location_shop: {
         type: DataTypes.STRING(45),
         allowNull: false
+    },
+    type_shop: {
+        type: DataTypes.STRING(45),
+        allowNull: false
     }
     }, {
         timestamps: false,
